@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+  <testsuite name="test_auth" tests="3" failures="1" errors="0" skipped="0" time="1.234">
+    <testcase classname="test_auth.TestLogin" name="test_login_valid" time="0.123">
+      <properties>
+        <property name="python_file" value="tests/test_auth.py"/>
+        <property name="python_class" value="TestLogin"/>
+        <property name="python_function" value="test_login_valid"/>
+      </properties>
+    </testcase>
+    <testcase classname="test_auth.TestLogin" name="test_login_invalid_password" time="0.456">
+      <failure type="AssertionError" message="Expected 401, got 200">
+        AssertionError: Expected 401, got 200
+        at test_auth.py:42
+      </failure>
+    </testcase>
+    <testcase classname="test_auth.TestLogin" name="test_login_parametrized[admin-True]" time="0.089"/>
+  </testsuite>
+</testsuites>

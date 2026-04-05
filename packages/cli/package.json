@@ -1,0 +1,19 @@
+{
+  "name": "testpipe",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "testpipe": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@testpipe/core": "*",
+    "@testpipe/parsers": "*",
+    "@testpipe/emitters": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}

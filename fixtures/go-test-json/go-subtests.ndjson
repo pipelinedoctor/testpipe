@@ -1,0 +1,9 @@
+{"Time":"2024-01-15T10:00:00Z","Action":"run","Package":"github.com/example/myapp","Test":"TestAuth"}
+{"Time":"2024-01-15T10:00:00Z","Action":"run","Package":"github.com/example/myapp","Test":"TestAuth/ValidToken"}
+{"Time":"2024-01-15T10:00:00.1Z","Action":"output","Package":"github.com/example/myapp","Test":"TestAuth/ValidToken","Output":"    auth_test.go:45: token validated\n"}
+{"Time":"2024-01-15T10:00:00.2Z","Action":"pass","Package":"github.com/example/myapp","Test":"TestAuth/ValidToken","Elapsed":0.201}
+{"Time":"2024-01-15T10:00:00.2Z","Action":"run","Package":"github.com/example/myapp","Test":"TestAuth/ExpiredToken"}
+{"Time":"2024-01-15T10:00:00.3Z","Action":"output","Package":"github.com/example/myapp","Test":"TestAuth/ExpiredToken","Output":"    auth_test.go:67: FAIL: expected error, got nil\n"}
+{"Time":"2024-01-15T10:00:00.4Z","Action":"fail","Package":"github.com/example/myapp","Test":"TestAuth/ExpiredToken","Elapsed":0.15}
+{"Time":"2024-01-15T10:00:00.4Z","Action":"fail","Package":"github.com/example/myapp","Test":"TestAuth","Elapsed":0.601}
+{"Time":"2024-01-15T10:00:00.5Z","Action":"fail","Package":"github.com/example/myapp","Elapsed":0.65}

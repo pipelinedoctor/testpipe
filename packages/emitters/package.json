@@ -1,0 +1,22 @@
+{
+  "name": "@testpipe/emitters",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./json": "./dist/json.js",
+    "./ndjson": "./dist/ndjson.js",
+    "./summary": "./dist/summary.js",
+    "./sqlite": "./dist/sqlite.js",
+    "./http": "./dist/http.js"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@testpipe/core": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}

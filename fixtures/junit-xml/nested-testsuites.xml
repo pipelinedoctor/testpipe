@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites name="root">
+  <testsuite name="suite_a" tests="2" time="1.0">
+    <testcase name="test_one" classname="SuiteA" time="0.5"/>
+    <testcase name="test_two" classname="SuiteA" time="0.5"/>
+  </testsuite>
+  <testsuite name="suite_b" tests="1" time="0.5">
+    <testcase name="test_three" classname="SuiteB" time="0.5">
+      <error message="Unexpected exception">RuntimeError: database unavailable</error>
+    </testcase>
+  </testsuite>
+</testsuites>

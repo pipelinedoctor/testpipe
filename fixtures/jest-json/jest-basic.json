@@ -1,0 +1,38 @@
+{
+  "numTotalTests": 3,
+  "numPassedTests": 2,
+  "numFailedTests": 1,
+  "numPendingTests": 0,
+  "testResults": [
+    {
+      "testFilePath": "/project/src/components/__tests__/Button.test.tsx",
+      "status": "failed",
+      "startTime": 1700000000000,
+      "endTime": 1700000001234,
+      "testResults": [
+        {
+          "ancestorTitles": ["Button"],
+          "title": "renders correctly",
+          "status": "passed",
+          "duration": 45
+        },
+        {
+          "ancestorTitles": ["Button"],
+          "title": "handles click events",
+          "status": "failed",
+          "duration": 12,
+          "failureMessages": [
+            "Error: expect(received).toBe(expected)\nExpected: true\nReceived: false\n  at Button.test.tsx:23"
+          ]
+        },
+        {
+          "ancestorTitles": ["Button", "when disabled"],
+          "title": "does not fire onClick",
+          "status": "passed",
+          "duration": 8
+        }
+      ]
+    }
+  ],
+  "snapshot": { "added": 0, "failure": 0, "matched": 2, "unchecked": 0, "updated": 0 }
+}
