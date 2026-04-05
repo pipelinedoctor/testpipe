@@ -4,7 +4,7 @@
   "workspaces": ["packages/*"],
   "scripts": {
     "build": "tsc --build",
-    "test": "tsc --build && node --test packages/*/dist/**/*.test.js",
+    "test": "tsc --build && node --test 'packages/*/dist/**/*.test.js' 'packages/*/dist/*.test.js'",
     "lint": "tsc --noEmit"
   },
   "devDependencies": {

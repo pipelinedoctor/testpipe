@@ -1,0 +1,44 @@
+{
+  "numTotalTests": 4,
+  "numPassedTests": 2,
+  "numFailedTests": 1,
+  "numPendingTests": 1,
+  "testResults": [
+    {
+      "testFilePath": "/project/src/utils.test.ts",
+      "name": "/project/src/utils.test.ts",
+      "startTime": 1700000000000,
+      "endTime": 1700000000500,
+      "tests": [
+        {
+          "name": "add numbers",
+          "status": "passed",
+          "duration": 5
+        },
+        {
+          "name": "subtract numbers",
+          "status": "failed",
+          "duration": 10,
+          "failureMessages": ["AssertionError: Expected 3, got 4\n  at utils.test.ts:12"]
+        },
+        {
+          "name": "multiply numbers",
+          "status": "skipped",
+          "duration": 0
+        },
+        {
+          "name": "benchmark add",
+          "mode": "benchmark",
+          "status": "passed",
+          "duration": 50
+        }
+      ]
+    }
+  ],
+  "config": {
+    "root": "/project"
+  },
+  "typecheck": {
+    "passed": true
+  }
+}

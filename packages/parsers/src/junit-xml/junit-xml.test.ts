@@ -106,4 +106,71 @@ describe("JUnit XML parser — edge cases", () => {
     const score = junitXmlParser.detect("hello world, not xml");
     assert.equal(score, 0.0);
   });
+
+  it("<skipped> element → status 'skipped', no failure", () => {
+    const input = `<?xml version="1.0"?><testsuite name="t" time="1"><testcase name="skip_me" time="0"><skipped/></testcase></testsuite>`;
+    const run = junitXmlParser.parse(input);
+    const tc = run.suites[0].cases[0];
+    assert.equal(tc.status, "skipped");
+    assert.equal(tc.failure, null);
+  });
+
+  it("preserves <system-out> on test suite", () => {
+    const input = `<?xml version="1.0"?><testsuite name="t" time="1"><system-out>suite stdout here</system-out><testcase name="x" time="0"/></testsuite>`;
+    const run = junitXmlParser.parse(input);
+    assert.equal(run.suites[0].systemOut, "suite stdout here");
+  });
+
+  it("preserves <system-out> on test case", () => {
+    const input = `<?xml version="1.0"?><testsuite name="t" time="1"><testcase name="x" time="0"><system-out>test stdout</system-out></testcase></testsuite>`;
+    const run = junitXmlParser.parse(input);
+    assert.equal(run.suites[0].cases[0].systemOut, "test stdout");
+  });
+
+  it("preserves properties on test suite", () => {
+    const input = `<?xml version="1.0"?><testsuite name="t" time="1"><properties><property name="env" value="staging"/></properties><testcase name="x" time="0"/></testsuite>`;
+    const run = junitXmlParser.parse(input);
+    assert.equal(run.suites[0].properties["env"], "staging");
+  });
+
+  it("preserves properties on test case", () => {
+    const input = `<?xml version="1.0"?><testsuite name="t" time="1"><testcase name="x" time="0"><properties><property name="retried" value="true"/></properties></testcase></testsuite>`;
+    const run = junitXmlParser.parse(input);
+    assert.equal(run.suites[0].cases[0].properties["retried"], "true");
+  });
+
+  it("multiple <failure> elements on one testcase → messages concatenated with separator", () => {
+    const input = `<?xml version="1.0"?><testsuite name="t" time="1">
+      <testcase name="multi_fail" time="0">
+        <failure message="First error">body one</failure>
+        <failure message="Second error">body two</failure>
+      </testcase>
+    </testsuite>`;
+    const run = junitXmlParser.parse(input);
+    const tc = run.suites[0].cases[0];
+    assert.equal(tc.status, "failed");
+    assert.ok(tc.failure?.message.includes("First error"), `message: ${tc.failure?.message}`);
+    assert.ok(tc.failure?.message.includes("Second error"), `message: ${tc.failure?.message}`);
+    assert.ok(tc.failure?.message.includes("---"), "Should use separator");
+  });
+
+  it("unicode and emoji in test names are preserved", () => {
+    const input = `<?xml version="1.0"?><testsuite name="t" time="1"><testcase name="test_emoji_🎉_and_中文" time="0"/></testsuite>`;
+    const run = junitXmlParser.parse(input);
+    assert.equal(run.suites[0].cases[0].name, "test_emoji_🎉_and_中文");
+  });
+
+  it("missing suite name defaults to 'unnamed'", () => {
+    const input = `<?xml version="1.0"?><testsuite time="1"><testcase name="x" time="0"/></testsuite>`;
+    const run = junitXmlParser.parse(input);
+    assert.equal(run.suites[0].name, "unnamed");
+  });
+
+  it("XML comment with no root element → returns empty run with parseErrors", () => {
+    // A comment with no element after it causes the parser to throw
+    const run = junitXmlParser.parse("<!-- just a comment -->");
+    assert.equal(run.suites.length, 0);
+    const errors = run.metadata["parseErrors"] as string[];
+    assert.ok(errors.length > 0, "Expected parseErrors to be populated");
+  });
 });
